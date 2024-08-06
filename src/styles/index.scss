@@ -1,1 +1,4 @@
-// This is where your application styles could go.
+/* Remove 'Edit this page on GitHub' link */
+main > .bx--grid > div:last-of-type {
+    display: none;
+}

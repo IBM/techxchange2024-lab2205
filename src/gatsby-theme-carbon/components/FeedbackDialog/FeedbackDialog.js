@@ -6,7 +6,8 @@ const FeedbackDialog = ({ props }) => {
     console.log({ ...data });
   };
 
-  return <ThemeFeedbackDialog {...props} onSubmit={onSubmit} />;
+  //return <ThemeFeedbackDialog {...props} onSubmit={onSubmit} />;
+  return null;
 };
 
 export default FeedbackDialog;
