@@ -4,7 +4,7 @@ module.exports = {
     description: 'IBM TechXchange 2024',
     keywords: 'gatsby,theme,carbon',
   },
-  pathPrefix: `/gtc`,
+  pathPrefix: `/techxchange2024-lab2205`,
   plugins: [
     {
       resolve: 'gatsby-plugin-manifest',
