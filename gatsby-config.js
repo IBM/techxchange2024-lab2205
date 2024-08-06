@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Theme Carbon',
-    description: 'A Gatsby theme for the carbon design system',
+    title: 'IBM TechXchange 2024',
+    description: 'IBM TechXchange 2024',
     keywords: 'gatsby,theme,carbon',
   },
   pathPrefix: `/gtc`,
@@ -11,7 +11,7 @@ module.exports = {
       options: {
         name: 'Carbon Design Gatsby Theme',
         icon: 'src/images/favicon.svg',
-        short_name: 'Gatsby Theme Carbon',
+        short_name: 'IBM TechXchange 2024',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#161616',
@@ -21,12 +21,13 @@ module.exports = {
     {
       resolve: 'gatsby-theme-carbon',
       options: {
-        mediumAccount: 'carbondesign',
         repository: {
-          baseUrl:
-            'https://github.com/carbon-design-system/gatsby-theme-carbon',
-          subDirectory: '/packages/example',
+          baseUrl: 'https://github.com/IBM/techxchange2024-lab2205',
         },
+        isSwitcherEnabled: false,
+        titleType: 'append',
+        navigationStyle: 'header',
+        isSearchEnabled: false,
       },
     },
   ],
