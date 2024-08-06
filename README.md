@@ -25,3 +25,10 @@ Built from <https://github.com/carbon-design-system/gatsby-starter-carbon-theme>
 ```
 npm run deply
 ```
+
+### Create Fork
+
+1. Update references to "Lab 2205" and "techxchange2024-lab2205" in:
+    * `src/pages/index.mdx`
+    * `src/gatsby-theme-carbon/components/LeftNav/ResourceLinks.js`
+1. After running `npm run deply` the first time, go to `/settings/pages` on the GitHub page and change the Branch to `gh-pages`.
