@@ -1,5 +1,5 @@
 ---
-title: Lab 2205 - Cloud native reactive microservices with WebSphere Liberty InstantOn and Kafka 
+title: Lab 2205 - Cloud native reactive microservices with Liberty InstantOn and Kafka 
 description: Lab summary
 ---
 
@@ -170,49 +170,39 @@ Let's get started!
 
 The client machine will perform the build of the application and offers a browser for accessing the application and Red Hat OpenShift.
 
-1. The first screen you'll see is a grid of all of the virtual machines:
-   
-   ![](../images/media/image9.png)
+1.  The first screen you'll see is the lab page. Find the virtual machine that ends in `student` and click its `Console` button to access the lab machine:
+    
+    ![](../images/media/console.png)
 
-1. Scroll down and find the machine with a name that ends in **student** and click on the Red Hat logo on the computer screen. For example:
-   
-   ![](../images/media/image10.png)
+1.  Click on the `Open in a new window` button to the left of the close button to open a larger screen:
+    
+    ![](../images/media/openinnewwindow1.png)
 
-1. Clicking on the "Red Hat" logo will open a new browser tab to the client virtual machine.
-
-1. If you see the following screen, then the screen is locked. Click anywhere on the screen and enter the password **Passw0rd** (with a capital P and a **zero** rather than an O) to login:
-   
-   ![](../images/media/image11.png)
-   
-   ![](../images/media/image12.png)
-
-1. If you see the following screen then you are already logged in:
-   
-   ![](../images/media/image13.png)
+1.  The screen should be an unlocked desktop. In case you ever find yourself at a locked desktop, click anywhere on the screen and enter the password **Passw0rd** (with a capital P and a **zero** rather than an O) to login:
+    
+    ![](../images/media/firstscreen.png)
 
 ### Copy and Pasting
 
-Throughout the lab, you may copy and paste from this lab guide into the client virtual machine:
+You may copy and paste from this lab guide into the client virtual machine:
 
-1. Ensure the target of the paste has focus in the virtual machine
+1.  Ensure the target of the paste has focus in the virtual machine (e.g. a terminal window).
 
-1. Click the Send Text icon at the top of the client virtual machine browser tab:
-   
-   ![](../images/media/image14.png)
+2.  Click the Cursor icon at the top of the client virtual machine browser tab:
+    
+    ![](../images/media/cursor.png)
 
-1. Paste something into the textbox and then click Send Text:
-   
-   ![](../images/media/image15.png)
+3.  Paste something into the textbox and then click `Slow Send Text`. After the text has completed sending, click the close button in the top right of the send text popup.
+    
+    ![](../images/media/copypaste2.png)
 
-1. Double check that the text has pasted correctly as we have seen cases where not all characters were sent.
-
-If you are having any issues copy/pasting within the virtual machine, you may use right click to perform either action instead.
+4.  You can try `Fast Send Text` but be careful to double check if all characters were sent successfully.
 
 ### Create the OpenShift Project
 
 The first thing we need to do is to create the project and the Kafka topics in OpenShift that your application instance will use:
 
-1. Click on the Firefox icon to open the browser:
+1. Double click on the Firefox icon to open the browser:
    
    ![](../images/media/image16.png)
 
@@ -286,7 +276,21 @@ Logging in:
    
    ![](../images/media/image30.png)
 
-1. Switch to the Terminal application. First, we will switch to the root user. Normally, the root user is not generally recommended to be used outside of administrative activities. However, Liberty [InstantOn requires root during the building](https://openliberty.io/docs/latest/instanton.html#linux-capabilities) of the InstantOn image (though it does not require root when running the images but instead a few particular privileges):
+1. Switch to the Terminal application.
+
+1. First, we need to clean up some disk space from previous builds to avoid running out of disk. Copy and paste the following command:
+
+   ```
+   podman image rm --all
+   ```
+
+1. Next, copy and paste the following command to delete more disk usage:
+
+   ```
+   sudo podman image rm --all
+   ```
+
+1. Next, we will switch to the root user. Normally, the root user is not generally recommended to be used outside of administrative activities. However, Liberty [InstantOn requires root during the building](https://openliberty.io/docs/latest/instanton.html#linux-capabilities) of the InstantOn image (though it does not require root when running the images but instead a few particular privileges):
 
    ```
    sudo -i
@@ -296,7 +300,7 @@ Logging in:
    
    ![](../images/media/image31.png)
 
-1. As noted in the output, by default, you may be placed into a project named "default". The first thing we want to do is change to the project you created above by using the "oc project $PROJECT" command. In the following example, replace studentX with the name of your project:
+1. As noted in the output, by default, you may be placed into a project named "default" or "student1". The first thing we want to do is change to the project you created above by using the "oc project $PROJECT" command. In the following example, replace studentX with the name of your project:
    
    ```
    oc project studentX
@@ -357,7 +361,7 @@ To prepare the application deployment, we will make a few changes.
    
    ![](../images/media/image35.png)
 
-1. Replace geocodetopic1 and locationtopic1 when a number that matches your project name. For example, if your project name is student2, then replace them with geocodetopic2 and locationtopic2.
+1. Replace geocodetopic1 and locationtopic1 with a number that matches your project name. For example, if your project name is student2, then replace them with geocodetopic2 and locationtopic2.
    
    ![](../images/media/image36.png)
 
@@ -413,6 +417,12 @@ To prepare the application deployment, we will make a few changes.
    podman tag localhost/surveyinputservice default-route-openshift-image-registry.apps.ocp.ibm.edu/$PROJECT/surveyinputservice
    ```
 
+   <InlineNotification>
+   
+   **WARNING**: Note in this step and some others below that `$PROJECT` should be replaced with your project name (e.g. studentN).
+   
+   </InlineNotification>
+
 1. Push the local build of the surveyinputservice microservice to OpenShift. **Make sure** to replace $PROJECT with your project name (e.g. studentN).
    
    ```
@@ -465,11 +475,17 @@ To prepare the application deployment, we will make a few changes.
 
 1. Copy and paste the value in the URL column in the previous output, switch to the browser, and paste the URL.
 
-1. Click on the "Location Survey" link but **do not** submit the form yet.
+1. Click on the "Location Survey" link:
    
    ![](../images/media/image41.png)
 
+1. **Do not** submit the form yet but just leave the browser tab open.
+   
+   ![](../images/media/input.png)
+
 1. Switch to VS Code, open `libertyEventDrivenSurvey/lib/example_surveyadminservice.yaml`, change student1 to your project name, and Save.
+
+   ![](../images/media/adminservice.png)
 
 1. Switch to the terminal and run:
    
